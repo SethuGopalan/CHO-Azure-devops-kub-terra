@@ -21,7 +21,7 @@ stages:
   - job: DevDeployJob
     steps:
     - bash: echo "DevDeplaoy  job Completed"
-  - job: DevDeployJob-seccond
+  - job: DevDeployJob2
     steps:
     - bash: echo "DevDeplaoy  seccond job Completed"
 - stage: QADeploy
@@ -29,7 +29,7 @@ stages:
   - job: QADeployJob
     steps:
     - bash: echo "QADeploy job Completed"
-  - job: QADeployJob-2
+  - job: QADeployJob2
     steps:
     - bash: echo "QADeploy seccond job Completed "
 - stage: ProdDeploy
@@ -37,7 +37,7 @@ stages:
   - job: ProdDeployJob
     steps:
     - bash: echo "ProdDeployJob completed"
-  - job: ProdDeployJob-2
+  - job: ProdDeployJob2
     steps:
     - bash: echo "ProdDeployJob-2 completed"
  
