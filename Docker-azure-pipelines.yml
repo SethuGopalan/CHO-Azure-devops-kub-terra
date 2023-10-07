@@ -21,6 +21,21 @@ stages:
       vmImage: ubuntu-latest
     steps:
     - script: |
+        # Install Docker
+        curl -fsSL https://get.docker.com -o get-docker.sh
+        sh get-docker.sh
+
+        # Add the current user to the docker group
+        sudo usermod -aG docker $(whoami)
+
+        # Restart Docker
+        sudo systemctl restart docker
+      displayName: 'Install Docker'
+
+# The rest of your pipeline steps...
+
+    # steps:
+    - script: |
        docker --version
        docker login -u  sethugopalan@outlook.com -p Lucky4ever
       displayName: 'Docker Version and Login'
