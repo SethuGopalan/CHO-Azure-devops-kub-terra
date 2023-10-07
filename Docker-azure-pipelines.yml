@@ -22,7 +22,7 @@ stages:
     steps:
     - script: |
        docker --version
-       docker login -u  passwsethugopalan@outlook.com -p Lucky4ever
+       docker login -u  sethugopalan@outlook.com -p Lucky4ever
       displayName: 'Docker Version and Login'
 
     - task: Docker@2
