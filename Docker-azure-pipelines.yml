@@ -20,11 +20,16 @@ stages:
     pool:
       vmImage: ubuntu-latest
     steps:
+    - script: |
+       docker --version
+       docker login -u  passwsethugopalan@outlook.com -p Lucky4ever
+      displayName: 'Docker Version and Login'
+
     - task: Docker@2
       displayName: Build an image
       inputs:
         containerRegistry: '777-docker-hub'
         repository: '777/currency-exchage-devops'
-        command: 'build'
+        command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
         tags: '$(tag)'
