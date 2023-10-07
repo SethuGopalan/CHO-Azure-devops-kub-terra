@@ -30,3 +30,4 @@ stages:
         repository: '7797 / currency-exchage-devops'
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
+        tags: '$(tag)'
