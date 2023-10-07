@@ -25,6 +25,6 @@ stages:
       inputs:
         containerRegistry: '777-docker-hub'
         repository: '777/currency-exchage-devops'
-        command: 'buildAndPush'
+        command: 'build'
         Dockerfile: '**/Dockerfile'
         tags: '$(tag)'
