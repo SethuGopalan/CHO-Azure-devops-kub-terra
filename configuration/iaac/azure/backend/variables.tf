@@ -4,7 +4,7 @@ variable subscription_id {}
 variable tenant_id {}
 
 variable resource_group {
-    default = "k8s_state_storage_resource_group"
+    default = "terraform-backend-rg"
 }
 
 variable environment {
@@ -12,5 +12,5 @@ variable environment {
 }
 
 variable location {
-    default = "westeurope"
+    default = "East US"
 }
