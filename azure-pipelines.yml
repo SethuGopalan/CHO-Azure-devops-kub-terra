@@ -46,7 +46,7 @@ steps:
     command: 'init'
 
     workingDirectory: '$(System.DefaultWorkingDirectory)'
-    commandOptions: '-upgrade -reconfigure  -var.client_id=$(client_id) -var.client_secret=$(client_secret) -var ssh_public_key=$(publickey.secureFilePath)'
+    commandOptions: '-backend-config=client_id=$(client_id) -backend-config=client_secret=$(client_secret) -backend-config=ssh_public_key=$(publickey.secureFilePath)'
     backendType: 'azurerm'
     backendServiceArm: 'Azure-Kubernets-Pipeline-connection'
     ensureBackend: true
