@@ -56,3 +56,17 @@ steps:
     backendAzureRmContainerName: 'storageaccount7797container'
     backendAzureRmKey: 'kebernets-dev.tfstate'
     allowTelemetryCollection: true
+- task: TerraformCLI@1
+  inputs:
+    command: 'validate'
+    allowTelemetryCollection: true
+- task: TerraformCLI@1
+  inputs:
+    command: 'plan'
+    environmentServiceName: 'Azure-Kubernets-Pipeline-connection'
+    allowTelemetryCollection: true
+- task: TerraformCLI@1
+  inputs:
+    command: 'apply'
+    environmentServiceName: 'Azure-Kubernets-Pipeline-connection'
+    allowTelemetryCollection: true
