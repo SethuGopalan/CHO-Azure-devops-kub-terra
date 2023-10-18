@@ -1,0 +1,58 @@
+trigger:
+- master
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- script: echo K8S Terraform Azure!
+  displayName: 'Run a one-line script'
+- task: DownloadSecureFile@1
+  name: publickey
+  inputs:
+    secureFile: 'azure_rsa.pub'
+- script: |
+    # Download and unzip Terraform binary
+    curl -Lo terraform.zip https://releases.hashicorp.com/terraform/1.6.1/terraform_1.6.1_linux_amd64.zip
+    unzip terraform.zip
+
+    # Move Terraform binary to /usr/local/bin/
+    sudo mv terraform /usr/local/bin/
+
+    # Verify Terraform installation
+    terraform --version
+  displayName: 'Install and Verify Terraform'
+- script: ls -l /usr/local/bin/
+  displayName: 'List Contents of /usr/local/bin/'
+- script: sudo chmod +x /usr/local/bin/terraform
+
+  displayName: 'Add Execution Permissions'
+
+
+
+- script: |
+    # This is a script to check the current working directory
+    echo "Current Working Directory: $(System.DefaultWorkingDirectory)"
+  displayName: 'Check Working Directory'
+
+- script: |
+    # This is a script to check the current working directory
+    echo "Current Working Directory: $(System.DefaultWorkingDirectory)"
+
+
+- task: TerraformCLI@1
+  inputs:
+    
+    command: 'init'
+
+    workingDirectory: '$(System.DefaultWorkingDirectory)'
+    commandOptions: '-upgrade -reconfigure  -var.client_id=$(client_id) -var.client_secret=$(client_secret) -var ssh_public_key=$(publickey.secureFilePath)'
+    backendType: 'azurerm'
+    backendServiceArm: 'Azure-Kubernets-Pipeline-connection'
+    ensureBackend: true
+    backendAzureRmResourceGroupName: 'terraform-backend-rg'
+    backendAzureRmResourceGroupLocation: 'East US'
+    backendAzureRmStorageAccountName: 'storageaccountsethu7797'
+    backendAzureRmContainerName: 'storageaccount7797container'
+    backendAzureRmKey: 'kebernets-dev.tfstate'
+    allowTelemetryCollection: true
