@@ -11,16 +11,16 @@ steps:
 - script: echo 'K8S Terraform Azure!'
   displayName: 'Run a one-line script'
 
-- task: DownloadSecureFile@1
-  name: publickey
-  inputs:
-    secureFile: 'azure_rsa.pub'
+# - task: DownloadSecureFile@1
+#   name: publickey
+#   inputs:
+#     secureFile: 'azure_rsa.pub'
 
 - task: TerraformCLI@1
   inputs:
     command: 'init'
     workingDirectory: '$(terraformConfigurationDirectory)'
-    commandOptions: '-backend-config=client_id=$(client_id) -backend-config=client_secret=$(client_secret) -backend-config=ssh_public_key=$(publickey.secureFilePath)'
+    commandOptions: '-backend-config=client_id=$(client_id) -backend-config=client_secret=$(client_secret)'
     backendType: 'azurerm'
     backendServiceArm: 'Azure-Kubernets-Pipeline-connection'
     backendAzureRmResourceGroupName: 'terraform-backend-rg'
