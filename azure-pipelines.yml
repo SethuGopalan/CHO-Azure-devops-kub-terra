@@ -46,7 +46,7 @@ steps:
   inputs:
     command: 'init'
     workingDirectory: '$(System.DefaultWorkingDirectory)'
-    commandOptions: '-migrate-state  -backend-config=client_id=$(client_id) -backend-config=client_secret=$(client_secret) -backend-config=ssh_public_key=$(publickey.secureFilePath)'
+    commandOptions: '-backend-config=client_id=$(client_id) -backend-config=client_secret=$(client_secret) -backend-config=ssh_public_key=$(publickey.secureFilePath)'
     backendType: 'azurerm'
     backendServiceArm: 'Azure-Kubernets-Pipeline-connection'
     ensureBackend: true
@@ -60,19 +60,16 @@ steps:
   inputs:
     command: 'validate'
     allowTelemetryCollection: true
-
+- task: TerraformCLI@1
+  inputs:
+    command: 'plan'
+    environmentServiceName: 'Azure-Kubernetes'
+    commandOptions: '-auto-approve'
+    allowTelemetryCollection: true
 
 - task: TerraformCLI@1
   inputs:
     command: 'apply'
-    workingDirectory: '$(System.DefaultWorkingDirectory)'
-    commandOptions: '-backend-config=client_id=$(client_id) -backend-config=client_secret=$(client_secret) -backend-config=ssh_public_key=$(publickey.secureFilePath)'
-    backendType: 'azurerm'
-    backendServiceArm: 'Azure-Kubernets-Pipeline-connection'
-    ensureBackend: true
-    backendAzureRmResourceGroupName: 'terraform-backend-rg'
-    backendAzureRmResourceGroupLocation: 'East US'
-    backendAzureRmStorageAccountName: 'storageaccountsethu7797'
-    backendAzureRmContainerName: 'storageaccount7797container'
-    backendAzureRmKey: 'kebernets-dev.tfstate'
+    environmentServiceName: 'Azure-Kubernetes'
+    commandOptions: '-auto-approve'
     allowTelemetryCollection: true
