@@ -35,6 +35,14 @@ steps:
   inputs:
     command: 'plan'
     
+    workingDirectory: '$(System.DefaultWorkingDirectory)'
+    environmentServiceName: 'Azure-Kubernets-Pipeline-connection'
+    allowTelemetryCollection: true
+    publishPlanResults: 'backend-state-plan'
+- task: TerraformCLI@1
+  inputs:
+    command: 'plan'
+    
     workingDirectory: '$(terraformConfigurationDirectory)/configuration/iaac/azure/kubernetes'
     environmentServiceName: 'Azure-Kubernets-Pipeline-connection'
     allowTelemetryCollection: true
